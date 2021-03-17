@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b21474dd04ef10438914399a2b5e919, type: 3}
+  m_Name: startingState
+  m_EditorClassIdentifier: 
+  storyText: 'Are You an experienced Pilot?
+
+    Choose your Difficulty
+
+    - Easy
+
+    -
+    Medium
+
+    - Hard'
+  nextStates:
+  - {fileID: 11400000, guid: 16ddd67424b8f2b42849b534f510e35f, type: 2}
+  - {fileID: 11400000, guid: 7f97cb1b87fdc934ea235dd53c4e1038, type: 2}
+  - {fileID: 11400000, guid: d62aeebd03ddc4f49930573018afc26d, type: 2}

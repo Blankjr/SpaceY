@@ -10,10 +10,15 @@ public class StoryIntro : MonoBehaviour
     public bool PlayOnAwake = true;
     public float Delay;
     [SerializeField] Text introTextObject;
+    [SerializeField] Text OutroTextObject;
+
     [SerializeField] State startingState;
 
     State state;
     string story;
+
+    private bool difficultyIsSelectable = false;
+    private int runnedStatesCounter = 0;
 
 
 
@@ -22,18 +27,13 @@ public class StoryIntro : MonoBehaviour
     public void ChangeText(string _text, float _delay = 0f)
     {
         introTextObject.text = ""; //clean text
-        StopCoroutine(PlayText(true)); //stop Coroutime if exist
+        StopCoroutine(PlayText()); //stop Coroutime if exist
         story = _text;
 
-        Invoke("Start_PlayText", _delay); //Invoke effect
+        Invoke("Start_PlayText", _delay); //Invoke effect 
     }
-    IEnumerator PlayText(bool delayedStart)
+    IEnumerator PlayText()
     {
-        // introTextObject.text = introTextObject.text.Remove(introTextObject.text.Length - 3);
-        // if (delayedStart)
-        // {
-        //     yield return new WaitForSeconds(3);
-        // }
         introTextObject.text = "";
         foreach (char c in story)
         {
@@ -41,18 +41,13 @@ public class StoryIntro : MonoBehaviour
             introTextObject.text += c;
             yield return new WaitForSeconds(0.125f);
         }
+        runnedStatesCounter++;
+        Debug.Log(runnedStatesCounter);
     }
 
     void Start_PlayText()
     {
-        StartCoroutine(PlayText(false));
-    }
-
-    void Update_Text(string _newText)
-    {
-        story = _newText;
-        introTextObject.text = "";
-        StartCoroutine(PlayText(true));
+        StartCoroutine(PlayText());
     }
 
     void Start()
@@ -61,30 +56,36 @@ public class StoryIntro : MonoBehaviour
         state = startingState;
         Start_PlayText();
         ChangeText(state.GetStateStory(), 20);
-        // Update_Text("Testing new state");
     }
 
     // Update is called once per frame
     void Update()
     {
-        ManageState();
 
+
+        if (runnedStatesCounter == 2)
+        {
+            ManageState();
+        }
+        
     }
 
     private void ManageState()
     {
         var nextStates = state.GetNextStates();
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (nextStates.Length > 0)
         {
-            state = nextStates[0];
-            introTextObject.text = state.GetStateStory();
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                state = nextStates[0];
+                introTextObject.text = state.GetStateStory();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                state = nextStates[1];
+                introTextObject.text = state.GetStateStory();
+                OutroTextObject.text = "Press Space to Continue!";
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            state = nextStates[1];
-            introTextObject.text = state.GetStateStory();
-        }
-
-
     }
 }

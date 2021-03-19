@@ -531,7 +531,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press Space to Continue
+  m_Text: 
 --- !u!222 &716529628
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -709,6 +709,7 @@ MonoBehaviour:
   PlayOnAwake: 1
   Delay: 0
   introTextObject: {fileID: 341972757}
+  OutroTextObject: {fileID: 716529627}
   startingState: {fileID: 11400000, guid: 2b653a86963ccec4b879997bbeffa300, type: 2}
 --- !u!4 &1448487822
 Transform:

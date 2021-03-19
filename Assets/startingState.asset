@@ -17,11 +17,11 @@ MonoBehaviour:
     Choose your Difficulty
 
     - Easy
+    (1)
 
-    -
-    Medium
+    - Medium (2)
 
-    - Hard'
+    - Hard (3)'
   nextStates:
   - {fileID: 11400000, guid: 16ddd67424b8f2b42849b534f510e35f, type: 2}
   - {fileID: 11400000, guid: 7f97cb1b87fdc934ea235dd53c4e1038, type: 2}

@@ -16,8 +16,6 @@ public class StoryIntro : MonoBehaviour
 
     State state;
     string story;
-
-    private bool difficultyIsSelectable = false;
     private int runnedStatesCounter = 0;
 
 
@@ -39,7 +37,7 @@ public class StoryIntro : MonoBehaviour
         {
             // Debug.Log(c);
             introTextObject.text += c;
-            yield return new WaitForSeconds(0.125f);
+            yield return new WaitForSeconds(0.1f); //0.125f
         }
         runnedStatesCounter++;
         Debug.Log(runnedStatesCounter);
@@ -55,7 +53,7 @@ public class StoryIntro : MonoBehaviour
         story = "_ You start your journey in a small Spaceship within the endless Universe. Are you prepared for saving the world?";
         state = startingState;
         Start_PlayText();
-        ChangeText(state.GetStateStory(), 20);
+        ChangeText(state.GetStateStory(), 12);
     }
 
     // Update is called once per frame
@@ -65,27 +63,40 @@ public class StoryIntro : MonoBehaviour
 
         if (runnedStatesCounter == 2)
         {
+            OutroTextObject.text = "Press a number on your Keyboard!";
             ManageState();
+
         }
-        
+
     }
 
     private void ManageState()
     {
         var nextStates = state.GetNextStates();
-        if (nextStates.Length > 0)
+        if (nextStates.Length >= 3)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 state = nextStates[0];
                 introTextObject.text = state.GetStateStory();
+                OutroTextObject.text = "Press Space to Continue!";
+                runnedStatesCounter++;
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 state = nextStates[1];
                 introTextObject.text = state.GetStateStory();
                 OutroTextObject.text = "Press Space to Continue!";
+                runnedStatesCounter++;
             }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                state = nextStates[2];
+                introTextObject.text = state.GetStateStory();
+                OutroTextObject.text = "Press Space to Continue!";
+                runnedStatesCounter++;
+            }
+
         }
     }
 }
